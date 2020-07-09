@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState, useMemo } from 'react'
+import dataService from './services/data'
+import TableContainer from './components/TableContainer'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [data, setData] = useState([])
+
+  //Prepared the data
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await dataService.getAll()
+      const contacts = data.results
+
+      setData(contacts)
+    }
+
+    fetchData()
+  }, [])
+
+  //Define Columns
+  const columns = useMemo(
+    () => [
+      { Header: 'Title', accessor: 'name.title' },
+      { Header: 'First Name', accessor: 'name.first' },
+      { Header: 'Last Name', accessor: 'name.last' },
+      { Header: 'Email', accessor: 'email' },
+      { Header: 'City', accessor: 'location.city' },
+    ],
+    []
+  )
+
+  return <TableContainer columns={columns} data={data} />
 }
 
-export default App;
+export default App
