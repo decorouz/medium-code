@@ -1,5 +1,6 @@
 import React from 'react'
 import { useTable } from 'react-table'
+import { Table } from 'reactstrap'
 
 //Use table requires an object with 2 properties: data(contact) and column.
 
@@ -15,7 +16,7 @@ const TableContainer = ({ columns, data }) => {
   console.log(useTable({ columns, data }))
 
   return (
-    <table {...getTableProps()}>
+    <Table {...getTableProps()}>
       <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
