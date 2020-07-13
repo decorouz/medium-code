@@ -65,10 +65,15 @@ function App() {
           </span>
         ),
       },
-      { Header: 'Title', accessor: 'name.title', Filter: SelectColumnFilter },
+      {
+        Header: 'Title',
+        accessor: 'name.title',
+        Filter: SelectColumnFilter,
+        disableSortBy: true,
+      },
       { Header: 'First Name', accessor: 'name.first' },
       { Header: 'Last Name', accessor: 'name.last' },
-      { Header: 'Email', accessor: 'email' },
+      { Header: 'Email', accessor: 'email', disableSortBy: true },
       { Header: 'City', accessor: 'location.city' },
       {
         Header: 'Hemisphere',
